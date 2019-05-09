@@ -35,19 +35,19 @@ void drawPlayer(int z)
 {
 	window(z+1,22,70,25);
 	textcolor(10);
-	cprintf("    €  ");
+	cprintf("    √õ  ");
 	window(z+1,23,70,25);
-	cprintf("   ﬁ");
+	cprintf("   √û");
 	textcolor(9);
-	cprintf("€");
+	cprintf("√õ");
 	textcolor(10);
-	cprintf("›  ");
+	cprintf("√ù  ");
 	window(z+1,24,70,25);
-	cprintf("  ﬁ");
+	cprintf("  √û");
 	textcolor(9);
-	cprintf("€ﬂ€");
+	cprintf("√õ√ü√õ");
 	textcolor(10);
-	cprintf("›  ");
+	cprintf("√ù  ");
 }
 
 
@@ -69,9 +69,9 @@ void gameStatus(int kStatusCode)
 		textcolor(LIGHTGREEN);
 		cprintf("  Playing.. ");
 	}
-	else if(kStatusCode == 2)
+	else if(kStatusCode == 2) {
 		cprintf("   Paused   ");
-	else
+	}else
 	{
 		textcolor(LIGHTRED);
 		cprintf("   Stoped   ");
@@ -89,24 +89,24 @@ void gameStatus(int kStatusCode)
 */
 void moveMissileUP()
 {
-	int flag=0,k;
-	static scr=0;
+	int flag = 0, k;
+	static scr = 0;
 
         /* Check, if any of user missile is hit to Enemy objects */
-	for(int i=0;i<gTotalEnemySize && gEnemy_X[i]!=0 ;i++)
+	for(int i = 0; i<gTotalEnemySize && gEnemy_X[i]!=0; i++)
 	{
-		for(k=0;k<20 ;k++)
+		for(k = 0; k < 20; k++)
 		{
 			/* Remove Enemy, if green missile hits enemy */
-			if(gEnemy_X[i]==gMissiles_Xpos[k] && gEnemy_Y[i]==gMissiles_Ypos[k]&& gMissiles_Xpos[k]!=0)
+			if(gEnemy_X[i] == gMissiles_Xpos[k] && gEnemy_Y[i] == gMissiles_Ypos[k] && gMissiles_Xpos[k]!=0)
 			{
-				gEnemy_X[i]=0;
+				gEnemy_X[i] = 0;
 				window(74,20,80,24);
 				scr++;
 				textcolor(15);
 				cprintf("%d",scr);
-				if(scr<10)
-				cprintf("  ");
+				if(scr < 10)
+				     cprintf("  ");
 				else cprintf(" ");
 			}
 		}
@@ -115,7 +115,7 @@ void moveMissileUP()
 	/* Move User Missiles onepoistion UP in the Space */
 	textcolor(GREEN);  /* Set color To GREEN for missile display */
 
-	for(i=0;i<20;i++)  /* User can fire 20 missiles in parallel */
+	for(i = 0; i < 20; i++)  /* User can fire 20 missiles in parallel */
 	{
 		if(gMissiles_Xpos[i]!=0)   /* if Missile present at this X coordinates */
 		{
@@ -126,7 +126,7 @@ void moveMissileUP()
 				cprintf("%c",4);
 
                         /* Remove the old position missile trace */
-			window(gMissiles_Xpos[i],gMissiles_Ypos[i]+1,gMissiles_Xpos[i]+1,gMissiles_Ypos[i]+2);
+			window(gMissiles_Xpos[i], gMissiles_Ypos[i]+1, gMissiles_Xpos[i]+1, gMissiles_Ypos[i]+2);
 			if(gMissiles_Ypos[i]!=21) 
 				cprintf(" ");
 
@@ -134,8 +134,8 @@ void moveMissileUP()
 			delay(22/flag);
 		}
 
-		if(gMissiles_Ypos[i]==0)  /* If missile reached top of the screen, then remove it from screen */
-			gMissiles_Xpos[i]=0;
+		if(gMissiles_Ypos[i] == 0)  /* If missile reached top of the screen, then remove it from screen */
+			gMissiles_Xpos[i] = 0;
 	}
 
 	textcolor(WHITE); /* Reset Screen Color back to White */
@@ -154,30 +154,30 @@ void moveEnemyDOWN()
 	int x,i;
 
 	/* Generate a random number to insert enemy at random position on the screen (Space) */
-	if(random(10)==1){
-	x=random(52)+7;
+	if(random(10) == 1) {
+	x = random(52) + 7;
 	textcolor(RED); /* Set Enemy Color to RED */
 
-	for(i=0;i<gTotalEnemySize;i++)
+	for(i = 0; i < gTotalEnemySize; i++)
 	{
-		if(gEnemy_X[i]==0)
+		if(gEnemy_X[i] == 0)
 		{
-			gEnemy_X[i]=x;
-			gEnemy_Y[i]=2;  /* start an enemy object from the top of the screen */ 
-			window(gEnemy_X[i],gEnemy_Y[i],gEnemy_X[i]+1,gEnemy_Y[i]+1);
+			gEnemy_X[i] = x;
+			gEnemy_Y[i] = 2;  /* start an enemy object from the top of the screen */ 
+			window(gEnemy_X[i], gEnemy_Y[i], gEnemy_X[i]+1, gEnemy_Y[i]+1);
 			cprintf("*");
 			break;
 		}
 	}             /// after
 
-	for(i=0;i<gTotalEnemySize;i++)
+	for(i = 0; i < gTotalEnemySize; i++)
 	{
 		if(random(2)) {
-			window(gEnemy_X[i],gEnemy_Y[i],gEnemy_X[i],gEnemy_Y[i]+2);
+			window(gEnemy_X[i], gEnemy_Y[i], gEnemy_X[i], gEnemy_Y[i]+2);
 			cprintf("+#");
 		
 			/* If enemy reached to user coordinates. STOP the Game */
-			if(gEnemy_Y[i]>=20)
+			if(gEnemy_Y[i] >= 20)
 			{
 				gameStatus(3); /* STOP the game */
 				sound(100);
@@ -225,11 +225,11 @@ void main()
 
 	/* Draw white box on the screen */
 	textcolor(15);
-	cprintf("\n ⁄                                                             ⁄ƒƒƒƒƒƒƒƒƒƒƒƒƒƒø ");
-	for(int i=0;i<18;i++)
-		cprintf(" ≥                                                             ≥              ≥ ");
+	cprintf("\n √ö                                                             √ö√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ¬ø ");
+	for(int i = 0; i < 18; i++)
+		cprintf(" ¬≥                                                             ¬≥              ¬≥ ");
 
-	cprintf(" ¿                                                             ¿ƒƒƒƒƒƒƒƒƒƒƒƒƒƒŸ ");
+	cprintf(" √Ä                                                             √Ä√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√ô ");
 
 	/* Write a display message in the right white color box */
 	window(66,3,78,21);
@@ -246,7 +246,7 @@ void main()
 	cprintf("Press Left,  ");
 	cprintf("Right to Move\n");
 	textcolor(WHITE);
-	cprintf("ƒƒƒƒƒƒƒƒƒƒƒƒ ");
+	cprintf("√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ√Ñ ");
 	cprintf("Status:      ");
 	cprintf("   Stoped    \n");  // cprintf("  Playing.. "); cprintf("   Stoped   ");
 	cprintf("Score :      ");
@@ -254,13 +254,13 @@ void main()
 //	getch(); return;
 
 
-	int x=0;
-	for(i=0;i<20;i++)
+	int x = 0;
+	for(i = 0; i < 20; i++)
 	{
 		gMissiles_Xpos[i]=0;
 	}
-	for(i=0;i<gTotalEnemySize;i++)
-		gEnemy_X[i]=0;
+	for(i = 0; i < gTotalEnemySize; i++)
+		gEnemy_X[i] = 0;
 	drawPlayer(x);
 
 	while(1)
@@ -292,25 +292,25 @@ void main()
 						sound(1500);
 						delay(40);
 						nosound();
-						for(i=0;i<20;i++)
+						for(i = 0; i < 20; i++)
 						{
-							if(gMissiles_Xpos[i]==0)
+							if(gMissiles_Xpos[i] == 0)
 							{
-								gMissiles_Xpos[i]=x+5;
-								gMissiles_Ypos[i]=21;
+								gMissiles_Xpos[i] = x + 5;
+								gMissiles_Ypos[i] = 21;
 								break;
 							}
 						}
 						break;
 			case 0 : 	ch=getch();
-						if(ch==75 && x>0)  /* If LEFT Arrow key is pressed */
+						if(ch == 75 && x > 0)  /* If LEFT Arrow key is pressed */
 						{
-							x-=1;  /* Move the Player by one poistion the LEFT */
+							x -= 1;  /* Move the Player by one poistion the LEFT */
 							drawPlayer(x);
 						}
-						else if(ch==77 && x<55) /* If RIGHT Arrow key is pressed */
+						else if(ch == 77 && x < 55) /* If RIGHT Arrow key is pressed */
 						{
-							x+=1;   /* Move the Player by one poistion to the RIGHT */
+							x += 1;   /* Move the Player by one poistion to the RIGHT */
 							drawPlayer(x);
 						}
 						break;
